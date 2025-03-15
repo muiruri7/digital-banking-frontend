@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <h3>Manage Bank Accounts</h3>
+    <div *ngIf="accounts && accounts.length; else noAccounts">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Account ID</th>
+            <th>Customer ID</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.id }}</td>
+            <td>{{ account.customerId }}</td>
+            <td>{{ account.balance | currency }}</td>
+            <td>{{ account.status }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" 
+                      *ngIf="account.status !== 'frozen'" 
+                      (click)="freezeAccount(account)">Freeze</button>
+              <button class="btn btn-sm btn-success" 
+                      *ngIf="account.status === 'frozen'" 
+                      (click)="unfreezeAccount(account)">Unfreeze</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noAccounts>
+      <p>No accounts found.</p>
+    </ng-template>
+  </div>
+  

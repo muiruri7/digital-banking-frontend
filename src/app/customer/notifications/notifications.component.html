@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h3>Notifications</h3>
+  <div *ngIf="loading">
+    <p>Loading notifications...</p>
+  </div>
+  <div *ngIf="errorMessage">
+    <div class="alert alert-danger">{{ errorMessage }}</div>
+  </div>
+  <div *ngIf="!loading && notifications.length > 0; else noNotifications">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let note of notifications">
+        <strong>{{ note.title }}</strong> - {{ note.message }}
+        <span class="text-muted float-end">{{ note.date | date:'short' }}</span>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noNotifications>
+    <p>No notifications available.</p>
+  </ng-template>
+</div>

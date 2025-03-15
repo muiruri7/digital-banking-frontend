@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h3>Audit Logs</h3>
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="mb-3">
+    <div class="input-group">
+      <input formControlName="searchTerm" type="text" class="form-control" placeholder="Search audit logs">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  <div *ngIf="loading">
+    <p>Loading audit logs...</p>
+  </div>
+  <div *ngIf="errorMessage">
+    <div class="alert alert-danger">{{ errorMessage }}</div>
+  </div>
+  <div *ngIf="!loading && auditLogs.length; else noLogs">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Log ID</th>
+          <th>User Email</th>
+          <th>Action</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of auditLogs">
+          <td>{{ log.id }}</td>
+          <td>{{ log.email }}</td>
+          <td>{{ log.action }}</td>
+          <td>{{ log.date | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noLogs>
+    <p>No audit logs found.</p>
+  </ng-template>
+</div>

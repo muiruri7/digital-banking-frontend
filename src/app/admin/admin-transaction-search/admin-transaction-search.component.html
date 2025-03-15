@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h3>Transaction Search</h3>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="mb-3">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <label>Date From</label>
+        <input formControlName="dateFrom" type="date" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label>Date To</label>
+        <input formControlName="dateTo" type="date" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label>Type</label>
+        <select formControlName="type" class="form-control">
+          <option value="">All</option>
+          <option value="deposit">Deposit</option>
+          <option value="withdraw">Withdraw</option>
+          <option value="transfer">Transfer</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Min Amount</label>
+        <input formControlName="minAmount" type="number" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label>Max Amount</label>
+        <input formControlName="maxAmount" type="number" class="form-control">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+  </form>
+
+  <div *ngIf="loading">
+    <p>Loading transactions...</p>
+  </div>
+  <div *ngIf="errorMessage">
+    <div class="alert alert-danger">{{ errorMessage }}</div>
+  </div>
+  <div *ngIf="!loading && transactions.length; else noTransactions">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Transaction ID</th>
+          <th>Account ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tx of transactions">
+          <td>{{ tx.id }}</td>
+          <td>{{ tx.accountId }}</td>
+          <td>{{ tx.type }}</td>
+          <td>{{ tx.amount | currency }}</td>
+          <td>{{ tx.date | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noTransactions>
+    <p>No transactions found.</p>
+  </ng-template>
+</div>

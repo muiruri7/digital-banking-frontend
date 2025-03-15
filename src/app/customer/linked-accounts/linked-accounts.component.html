@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <h3>Linked Accounts</h3>
+  <div *ngIf="accounts && accounts.length; else noAccounts">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th>Balance</th>
+          <th>Account Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.accountNumber }}</td>
+          <td>{{ account.balance | currency }}</td>
+          <td>{{ account.accountType }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="selectAccount(account)">View Mini Statement</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noAccounts>
+    <p>No linked accounts found.</p>
+  </ng-template>
+</div>

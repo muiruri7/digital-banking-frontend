@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <h3>Pending Transactions</h3>
+    <div *ngIf="loading">
+      <p>Loading pending transactions...</p>
+    </div>
+    <div *ngIf="errorMessage">
+      <div class="alert alert-danger">{{ errorMessage }}</div>
+    </div>
+    <div *ngIf="!loading && transactions && transactions.length > 0; else noPending">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Account ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tx of transactions">
+            <td>{{ tx.id }}</td>
+            <td>{{ tx.accountId }}</td>
+            <td>{{ tx.type }}</td>
+            <td>{{ tx.amount | currency }}</td>
+            <td>{{ tx.date | date:'short' }}</td>
+            <td>
+              <button class="btn btn-sm btn-success me-1" (click)="approveTransaction(tx)">Approve</button>
+              <button class="btn btn-sm btn-danger" (click)="rejectTransaction(tx)">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noPending>
+      <p>No pending transactions.</p>
+    </ng-template>
+  </div>
+  

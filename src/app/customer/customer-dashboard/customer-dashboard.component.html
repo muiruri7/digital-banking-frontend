@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>Customer Dashboard</h2>
+  <nav>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="profile" routerLinkActive="active">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="accounts" routerLinkActive="active">Accounts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="deposit-withdraw" routerLinkActive="active">Deposit/Withdraw</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="transfer" routerLinkActive="active">Transfer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="notifications" routerLinkActive="active">Notifications</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="transaction-filter" routerLinkActive="active">Transaction Filter</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="mt-3">
+    <!-- If desired, you can embed the linked accounts component here and capture its event -->
+    <!-- <app-linked-accounts (accountSelected)="onAccountSelected($event)"></app-linked-accounts> -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

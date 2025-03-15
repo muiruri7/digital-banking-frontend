@@ -6,14 +6,25 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <!-- Show Login if user is not authenticated -->
+        <!-- Show Login if not authenticated -->
         <li class="nav-item" *ngIf="!isAuthenticated">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <!-- Show Logout if user is authenticated -->
-        <li class="nav-item" *ngIf="isAuthenticated">
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
+        <!-- When authenticated, show role-specific dashboard links and logout -->
+        <ng-container *ngIf="isAuthenticated">
+          <!-- For admin users -->
+          <li class="nav-item" *ngIf="userRole === 'admin'">
+            <a class="nav-link" routerLink="/admin-dashboard">Admin Dashboard</a>
+          </li>
+          <!-- For customer users -->
+          <li class="nav-item" *ngIf="userRole === 'customer'">
+            <a class="nav-link" routerLink="/customer-dashboard">Dashboard</a>
+          </li>
+          <!-- Logout option -->
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>

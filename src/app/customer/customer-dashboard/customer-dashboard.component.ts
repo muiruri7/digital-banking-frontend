@@ -1,15 +1,16 @@
-// src/app/customer/customer-dashboard/customer-dashboard.component.ts
-
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-dashboard',
-  template: `
-    <div class="container mt-5">
-      <h2>Customer Dashboard</h2>
-      <p>Welcome! Here you can view your profile, accounts, and transaction history.</p>
-      <!-- Future implementation: account details, mini-statements, transfer forms, etc. -->
-    </div>
-  `
+  templateUrl: './customer-dashboard.component.html',
+  styleUrls: ['./customer-dashboard.component.scss']
 })
-export class CustomerDashboardComponent {}
+export class CustomerDashboardComponent {
+  constructor(private router: Router) {}
+
+  // Trigger navigation to mini-statement for a selected account.
+  onAccountSelected(accountId: string): void {
+    this.router.navigate(['customer-dashboard/mini-statement', accountId]);
+  }
+}

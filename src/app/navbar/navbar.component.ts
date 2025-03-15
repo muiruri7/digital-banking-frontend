@@ -1,5 +1,3 @@
-// src/app/navbar/navbar.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../authentication/auth.service';
 
@@ -9,17 +7,18 @@ import { AuthService } from '../authentication/auth.service';
 })
 export class NavbarComponent implements OnInit {
   isAuthenticated = false;
+  userRole: string | null = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    // Subscribe to authentication state to update the navbar accordingly
-    this.authService.isAuthenticated$.subscribe(status => {
-      this.isAuthenticated = status;
+    // Subscribe to authentication status and update role accordingly.
+    this.authService.isAuthenticated$.subscribe(auth => {
+      this.isAuthenticated = auth;
+      this.userRole = auth ? this.authService.getUserRole() : null;
     });
   }
 
-  // Call the logout method from AuthService when user clicks the Logout button
   logout(): void {
     this.authService.logout();
   }

@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h3>{{ transactionType | titlecase }} Money</h3>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="accountId" class="form-label">Account ID</label>
+      <input formControlName="accountId" id="accountId" class="form-control" placeholder="Enter Account ID">
+      <div *ngIf="transactionForm.get('accountId')?.invalid && transactionForm.get('accountId')?.touched" class="text-danger">
+        Account ID is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input formControlName="amount" id="amount" type="number" class="form-control" placeholder="Enter Amount">
+      <div *ngIf="transactionForm.get('amount')?.invalid && transactionForm.get('amount')?.touched" class="text-danger">
+        Enter a valid amount greater than zero.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="submitting || transactionForm.invalid">
+      {{ transactionType | titlecase }}
+    </button>
+  </form>
+  <div class="mt-2">
+    <button class="btn btn-link" (click)="toggleTransactionType()">
+      Switch to {{ transactionType === 'deposit' ? 'Withdraw' : 'Deposit' }}
+    </button>
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success mt-2">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-2">{{ errorMessage }}</div>
+</div>

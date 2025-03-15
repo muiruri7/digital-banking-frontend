@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h3>Transfer Funds</h3>
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="fromAccountId" class="form-label">From Account ID</label>
+      <input formControlName="fromAccountId" id="fromAccountId" type="text" class="form-control" placeholder="Enter your Account ID">
+      <div *ngIf="transferForm.get('fromAccountId')?.invalid && transferForm.get('fromAccountId')?.touched" class="text-danger">
+        From Account ID is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="toAccountId" class="form-label">To Account ID</label>
+      <input formControlName="toAccountId" id="toAccountId" type="text" class="form-control" placeholder="Enter recipient's Account ID">
+      <div *ngIf="transferForm.get('toAccountId')?.invalid && transferForm.get('toAccountId')?.touched" class="text-danger">
+        To Account ID is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input formControlName="amount" id="amount" type="number" class="form-control" placeholder="Enter transfer amount">
+      <div *ngIf="transferForm.get('amount')?.invalid && transferForm.get('amount')?.touched" class="text-danger">
+        Enter a valid amount greater than zero.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="submitting || transferForm.invalid">
+      {{ submitting ? 'Processing...' : 'Transfer' }}
+    </button>
+  </form>
+  <div *ngIf="successMessage" class="alert alert-success mt-2">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-2">{{ errorMessage }}</div>
+</div>

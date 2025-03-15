@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h3>Filter Transactions</h3>
+  <form [formGroup]="filterForm" (ngSubmit)="onFilter()">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <label>Date From</label>
+        <input formControlName="dateFrom" type="date" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label>Date To</label>
+        <input formControlName="dateTo" type="date" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label>Type</label>
+        <select formControlName="type" class="form-control">
+          <option value="">All</option>
+          <option value="deposit">Deposit</option>
+          <option value="withdraw">Withdraw</option>
+          <option value="transfer">Transfer</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Min Amount</label>
+        <input formControlName="minAmount" type="number" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label>Max Amount</label>
+        <input formControlName="maxAmount" type="number" class="form-control">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Apply Filter</button>
+  </form>
+</div>
